@@ -17,11 +17,13 @@ pipeline {
                 }
             }
         }
+        /*
         stage('Build backend') {
             when { branch 'master' }
             steps {
-                //build 'FINTprosjektet/fint-betaling/master'
+                build 'FINTprosjektet/fint-betaling/master'
             }
         }
+        */
     }
 }
