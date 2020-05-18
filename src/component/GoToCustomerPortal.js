@@ -19,14 +19,14 @@ class GoToCustomerPortal extends Component {
                         <Button fullWidth={fullWidth} variant="contained" color="primary"
                                 href="https://kunde.felleskomponent.no"
                                 component={() => window.location = 'https://kunde.felleskomponent.no'}>
-                            Gå til FINT Kunde Portal
+                            Gå til FINT Kundeportal
                         </Button>
                     )
                     :
                     (
                         <Button fullWidth={fullWidth} variant="contained" color="primary"
                                 href="https://kunde.felleskomponent.no">
-                            Gå til FINT Kunde Portal
+                            Gå til FINT Kundeportal
                         </Button>
                     )
                 }

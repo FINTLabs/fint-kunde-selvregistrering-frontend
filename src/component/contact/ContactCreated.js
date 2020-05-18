@@ -19,10 +19,10 @@ class ContactCreated extends Component {
             <React.Fragment>
                 <div className={classes.message}>
                     <Typography variant="subheading">
-                        Brukeren din er nå opprette.
+                        Brukeren din er nå opprettet.
                     </Typography>
                     <Typography variant="body1">
-                        For at du skal kunne ta i bruk FINT Kunde Portal må du be FINT administratoren i din
+                        For at du skal kunne ta i bruk FINT Kundeportal må du be FINT administratoren i din
                         organisasjon gi det rettigheter til å administrere din organisasjon.
                     </Typography>
                 </div>

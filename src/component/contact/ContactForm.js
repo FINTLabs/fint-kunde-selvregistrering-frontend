@@ -9,10 +9,10 @@ const styles = (theme) => ({
     }
 });
 
-class ContactNewForm extends Component {
+class ContactForm extends Component {
 
     render() {
-        const {classes, nin} = this.props;
+        const {classes, nin, contact} = this.props;
         return (
 
             <React.Fragment>
@@ -28,6 +28,7 @@ class ContactNewForm extends Component {
                     label="Fornavn"
                     required
                     fullWidth
+                    value={contact ? contact.firstName : ' '}
                     onChange={this.props.updateContactState}
                 />
                 <TextField
@@ -35,6 +36,7 @@ class ContactNewForm extends Component {
                     label="Etternavn"
                     required
                     fullWidth
+                    value={contact ? contact.lastName : ' '}
                     onChange={this.props.updateContactState}
                 />
                 <TextField
@@ -42,6 +44,7 @@ class ContactNewForm extends Component {
                     label="E-post"
                     required
                     fullWidth
+                    value={contact ? contact.mail : ' '}
                     onChange={this.props.updateContactState}
                 />
                 <TextField
@@ -49,12 +52,13 @@ class ContactNewForm extends Component {
                     label="Mobil"
                     required
                     fullWidth
+                    value={contact ? contact.mobile : ' '}
                     onChange={this.props.updateContactState}
                 />
                 <Grid container className={classes.button} justify="flex-end" alignItems="flex-end">
                     <Button variant="contained" disabled={!this.props.isFormValid()}
                             onClick={() => this.props.createContact()} color="primary">
-                        Opprett
+                        {contact ? "Oppdater" : "Opprett"}
                     </Button>
                 </Grid>
             </React.Fragment>
@@ -62,7 +66,7 @@ class ContactNewForm extends Component {
     }
 }
 
-ContactNewForm.propTypes = {
+ContactForm.propTypes = {
     classes: PropTypes.object.isRequired,
     createContact: PropTypes.func.isRequired,
     isFormValid: PropTypes.func.isRequired,
@@ -70,5 +74,5 @@ ContactNewForm.propTypes = {
     updateContactState: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(ContactNewForm);
+export default withStyles(styles)(ContactForm);
 

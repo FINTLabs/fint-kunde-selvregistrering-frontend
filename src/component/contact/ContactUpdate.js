@@ -1,11 +1,10 @@
-import React, {Component} from "react";
-import {withStyles} from "@material-ui/core";
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
 import ContactApi from "../../data/ContactApi";
 import Paper from "../../../node_modules/@material-ui/core/Paper/Paper";
 import Grid from "../../../node_modules/@material-ui/core/Grid/Grid";
 import ContactForm from "./ContactForm";
-import ContactCreated from "./ContactCreated";
 
 
 const styles = (theme) => ({
@@ -26,12 +25,12 @@ const styles = (theme) => ({
     }
 });
 
-class ContactNew extends Component {
+class ContactUpdate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contact: {},
-            created: false,
+            updated: false,
+            contact: this.props.contact
         };
     }
 
@@ -40,15 +39,14 @@ class ContactNew extends Component {
 
         const contact = this.state.contact;
         contact[field] = event.target.value;
-        contact["nin"] = this.props.nin;
-        return this.setState({contact: contact});
+        return this.setState({ contact: contact });
     };
 
-    createContact = () => {
-        ContactApi.createContact(this.state.contact)
+    updateContact = () => {
+        ContactApi.updateContact(this.state.contact)
             .then(response => {
-                if (response.status === 201) {
-                    this.setState({created: true});
+                if (response.status === 200) {
+                    this.setState({ updated: true });
                 }
             })
             .catch(() => {
@@ -60,37 +58,23 @@ class ContactNew extends Component {
         return contact.nin && contact.firstName && contact.lastName && contact.mail && contact.mobile;
     };
 
-    renderNewContactForm() {
-        const {nin} = this.props;
-
-        return (
-            <ContactForm
-                createContact={this.createContact}
-                isFormValid={this.isFormValid}
-                updateContactState={this.updateContactState}
-                nin={nin}
-            />
-        );
-    }
-
-    static renderCreatedMessage() {
-        return (
-            <ContactCreated/>
-        );
-    }
-
     render() {
-        const {classes} = this.props;
-        const {created} = this.state;
+        const { classes } = this.props;
+        const { contact } = this.state;
         return (
             <Grid container className={classes.root} justify="center" alignItems="center">
                 <Grid item>
                     <Paper className={classes.paper}>
                         <Grid container justify="center" alignItems="center">
-                            <img src="fint.svg" alt="logo" className={classes.logo}/>
+                            <img src="fint.svg" alt="logo" className={classes.logo} />
                         </Grid>
-                        {!created && this.renderNewContactForm()}
-                        {created && ContactNew.renderCreatedMessage()}
+                        <ContactForm
+                            createContact={this.updateContact}
+                            isFormValid={this.isFormValid}
+                            updateContactState={this.updateContactState}
+                            contact={contact}
+                            nin={contact.nin}
+                        />
                     </Paper>
                 </Grid>
             </Grid>
@@ -99,9 +83,8 @@ class ContactNew extends Component {
     }
 }
 
-ContactNew.propTypes = {
-    classes: PropTypes.object.isRequired,
-    nin: PropTypes.string.isRequired
+ContactUpdate.propTypes = {
+    classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ContactNew);
+export default withStyles(styles)(ContactUpdate);
