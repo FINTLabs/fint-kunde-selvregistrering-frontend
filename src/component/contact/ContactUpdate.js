@@ -5,7 +5,8 @@ import ContactApi from "../../data/ContactApi";
 import Paper from "../../../node_modules/@material-ui/core/Paper/Paper";
 import Grid from "../../../node_modules/@material-ui/core/Grid/Grid";
 import ContactForm from "./ContactForm";
-
+import GoToCustomerPortal from "../GoToCustomerPortal";
+import ContactDelete from './ContactDelete';
 
 const styles = (theme) => ({
     root: {},
@@ -30,6 +31,7 @@ class ContactUpdate extends Component {
         super(props);
         this.state = {
             updated: false,
+            complete: this.props.complete,
             contact: this.props.contact
         };
     }
@@ -60,7 +62,7 @@ class ContactUpdate extends Component {
 
     render() {
         const { classes } = this.props;
-        const { contact } = this.state;
+        const { contact, complete } = this.state;
         return (
             <Grid container className={classes.root} justify="center" alignItems="center">
                 <Grid item>
@@ -75,6 +77,9 @@ class ContactUpdate extends Component {
                             contact={contact}
                             nin={contact.nin}
                         />
+                        {complete
+                            ? <GoToCustomerPortal redirect={false} fullWidth={true} />
+                            : <ContactDelete />}
                     </Paper>
                 </Grid>
             </Grid>

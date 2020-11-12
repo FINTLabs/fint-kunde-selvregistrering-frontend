@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {withStyles} from "@material-ui/core";
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
 import ContactApi from "../../data/ContactApi";
 import Paper from "../../../node_modules/@material-ui/core/Paper/Paper";
@@ -41,14 +41,14 @@ class ContactNew extends Component {
         const contact = this.state.contact;
         contact[field] = event.target.value;
         contact["nin"] = this.props.nin;
-        return this.setState({contact: contact});
+        return this.setState({ contact: contact });
     };
 
     createContact = () => {
         ContactApi.createContact(this.state.contact)
             .then(response => {
                 if (response.status === 201) {
-                    this.setState({created: true});
+                    this.setState({ created: true });
                 }
             })
             .catch(() => {
@@ -61,7 +61,7 @@ class ContactNew extends Component {
     };
 
     renderNewContactForm() {
-        const {nin} = this.props;
+        const { nin } = this.props;
 
         return (
             <ContactForm
@@ -75,21 +75,26 @@ class ContactNew extends Component {
 
     static renderCreatedMessage() {
         return (
-            <ContactCreated/>
+            <ContactCreated />
         );
     }
 
     render() {
-        const {classes} = this.props;
-        const {created} = this.state;
+        const { classes, nin } = this.props;
+        const { created } = this.state;
         return (
             <Grid container className={classes.root} justify="center" alignItems="center">
                 <Grid item>
                     <Paper className={classes.paper}>
                         <Grid container justify="center" alignItems="center">
-                            <img src="fint.svg" alt="logo" className={classes.logo}/>
+                            <img src="fint.svg" alt="logo" className={classes.logo} />
                         </Grid>
-                        {!created && this.renderNewContactForm()}
+                        <ContactForm
+                            createContact={this.createContact}
+                            isFormValid={this.isFormValid}
+                            updateContactState={this.updateContactState}
+                            nin={nin}
+                        />
                         {created && ContactNew.renderCreatedMessage()}
                     </Paper>
                 </Grid>

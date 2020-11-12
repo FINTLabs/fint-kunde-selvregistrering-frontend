@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import ContactApi from "./data/ContactApi";
 import ContactNew from "./component/contact/ContactNew";
 import LoadingProgress from "./component/LoadingProgress";
-import GoToCustomerPortal from "./component/GoToCustomerPortal";
 import ContactUpdate from './component/contact/ContactUpdate';
-import ContactDelete from './component/contact/ContactDelete';
 
 class Main extends Component {
     constructor(props) {
@@ -54,13 +52,11 @@ class Main extends Component {
         const { contact } = this.state;
         if (contact.legal.length || contact.technical.length) {
             return <div>
-                <ContactUpdate contact={contact} />
-                <GoToCustomerPortal redirect={false} />
+                <ContactUpdate contact={contact} complete={true} />
             </div>;
         } else {
             return <div>
-                <ContactUpdate contact={contact} />
-                <ContactDelete />
+                <ContactUpdate contact={contact} complete={false} />
             </div>;
         }
     }
