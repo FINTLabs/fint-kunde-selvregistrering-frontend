@@ -32,6 +32,10 @@ class ContactDelete extends Component {
             backgroundColor: confirm ? 'red' : 'white',
         };
         return <Grid container className={classes.root} justify="center" alignItems="center">
+            <Paper className={classes.paper}>
+                For at du skal kunne ta i bruk FINT Kundeportal må du be FINT administratoren i din
+                organisasjon gi det rettigheter til å administrere din organisasjon.
+            </Paper>
             <Grid item>
                 <Paper className={classes.paper}>
                     <Button style={buttonStyle} onClick={() => this.deleteContact()}>{label}</Button>
