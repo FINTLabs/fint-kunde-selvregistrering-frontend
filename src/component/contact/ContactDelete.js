@@ -1,6 +1,8 @@
-import React, { Component } from "react";
-import { Grid, Paper, Button, withStyles } from "@material-ui/core";
+import React, {Component} from "react";
+import {Box, Button, Typography, withStyles} from "@material-ui/core";
 import ContactApi from "../../data/ContactApi";
+import InfoIcon from "@material-ui/icons/InfoOutlined";
+import {grey} from "@material-ui/core/colors";
 
 const styles = (theme) => ({
     root: {},
@@ -26,26 +28,36 @@ class ContactDelete extends Component {
     }
 
     render() {
-        const { classes } = this.props;
-        const { label, confirm } = this.state;
+        const {classes} = this.props;
+        const {label, confirm} = this.state;
         const buttonStyle = {
             backgroundColor: confirm ? 'red' : 'white',
         };
-        return <Grid container className={classes.root} justify="center" alignItems="center">
-            <Paper className={classes.paper}>
-                For at du skal kunne ta i bruk FINT Kundeportal må du be FINT administratoren i din
-                organisasjon gi det rettigheter til å administrere din organisasjon.
-            </Paper>
-            <Grid item>
-                <Paper className={classes.paper}>
-                    <Button style={buttonStyle} onClick={() => this.deleteContact()}>{label}</Button>
-                </Paper>
-            </Grid>
-        </Grid>;
+        return (
+            <Box mt={4} display="flex" flexDirection="column" alignItems="center">
+                <Box border={1} borderRadius={8} p={2} borderColor="grey.400" display="flex">
+                    <Box mr={3}>
+                    <InfoIcon fontSize="large" style={{ color: grey[600] }}/>
+                    </Box>
+                    <Typography variant="body2">
+                        For at du skal kunne ta i bruk FINT Kundeportal må du be FINT
+                        administratoren i
+                        din
+                        organisasjon gi deg rettigheter til å administrere din organisasjon.
+                    </Typography>
+                </Box>
+                <Box mt={2}>
+                    <Button onClick={() => this.deleteContact()}
+                            variant={confirm ? "contained" : "outlined"}
+                            color={confirm ? "secondary" : "default"}
+                    >{label}</Button>
+                </Box>
+            </Box>
+        );
     }
 
     deleteContact() {
-        const { label, confirm } = this.state;
+        const {label, confirm} = this.state;
         if (confirm) {
             ContactApi.deleteContact();
             this.setState({
@@ -55,8 +67,14 @@ class ContactDelete extends Component {
             });
             // TODO: route to Main
         } else {
-            return this.setState({
-                label: label + "!",
+            setTimeout(() => {
+                this.setState({
+                    label: label,
+                    confirm: false,
+                });
+            }, 2000)
+            this.setState({
+                label: "Klikk for å bekrefte!",
                 confirm: true,
             });
         }

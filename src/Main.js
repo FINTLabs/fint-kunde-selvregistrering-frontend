@@ -28,7 +28,7 @@ const Main = () => {
                 setFoundContact(false);
             }))
             .finally(() => setLoading(false));
-    }, [nin, contact, foundContact]);
+    }, [nin, foundContact]);
 
     const renderFound = () => {
         if (contact.legal.length || contact.technical.length) {

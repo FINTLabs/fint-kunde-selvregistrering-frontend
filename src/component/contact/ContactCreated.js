@@ -21,7 +21,7 @@ class ContactCreated extends Component {
                     <Typography variant="subheading">
                         Brukeren din er nå opprettet.
                     </Typography>
-                    <Typography variant="body1">
+                    <Typography variant="h1">
                         For at du skal kunne ta i bruk FINT Kundeportal må du be FINT administratoren i din
                         organisasjon gi det rettigheter til å administrere din organisasjon.
                     </Typography>

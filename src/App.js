@@ -8,16 +8,16 @@ import fintLogo from "./images/fint-by-vigo.svg";
 const theme = createMuiTheme({
     palette: {
         primary: {
-            light: '#f05545',
-            main: '#b71c1c',
-            dark: '#7f0000',
-            contrastText: '#fff',
+            light: '#7fb434',
+            main: '#5FA202',
+            dark: '#427101',
+            //contrastText: '#fff',
         },
         secondary: {
-            light: '#98ee99',
-            main: '#66bb6a',
-            dark: '#338a3e',
-            contrastText: '#000',
+            light: '#4b727a',
+            main: '#1F4F59',
+            dark: '#15373e',
+            //contrastText: '#000',
         },
     },
 });
@@ -38,7 +38,7 @@ function App() {
         <div className="App">
             <MuiThemeProvider theme={theme}>
                 <Box display="flex" justifyContent="center">
-                    <Box maxWidth="375px">
+                    <Box maxWidth="500px">
                         <Grid container justify="center" alignItems="center">
                             <img src={fintLogo} alt="logo" className={classes.logo}/>
                         </Grid>
