@@ -5,7 +5,7 @@ import { Button, TextField, withStyles } from "@material-ui/core";
 
 const styles = (theme) => ({
     button: {
-        marginTop: theme.spacing.unit * 4,
+        marginTop: theme.spacing(4),
     }
 });
 

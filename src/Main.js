@@ -1,69 +1,46 @@
-import React, { Component } from 'react';
+import React, {useEffect, useState} from 'react';
 import ContactApi from "./data/ContactApi";
-import ContactNew from "./component/contact/ContactNew";
 import LoadingProgress from "./component/LoadingProgress";
-import ContactUpdate from './component/contact/ContactUpdate';
+import ContactNew from "./component/contact/ContactNew";
+import ContactUpdate from "./component/contact/ContactUpdate";
 
-class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = ({
-            foundContact: null,
-        });
-    }
+const Main = () => {
 
-    render() {
-        let responseStatus;
-        const { foundContact } = this.state;
-        if (foundContact === null) {
-            ContactApi.getContact()
-                .then(response => {
-                    responseStatus = response.status;
-                    return response.json();
-                })
-                .then(json => {
-                    if (responseStatus === 200) {
-                        this.setState({
-                            contact: json,
-                            nin: json.nin,
-                            foundContact: true
-                        });
-                    } else {
-                        this.setState({
-                            nin: json.message,
-                            foundContact: false,
-                            contact: null,
-                        });
-                    }
-                });
-            return (
-                <LoadingProgress size={50} />
-            );
-        }
-        else if (foundContact === false) {
-            return this.renderNew();
-        }
-        else if (foundContact === true) {
-            return this.renderFound();
-        }
-    }
+    const [loading, setLoading] = useState(false);
+    const [foundContact, setFoundContact] = useState(false);
+    const [contact, setContact] = useState(null);
+    const [nin, setNin] = useState("");
 
-    renderFound() {
-        const { contact } = this.state;
+    useEffect(() => {
+        setLoading(true);
+        ContactApi
+            .getContact()
+            .then(response => {
+                if (response.status === 200) {
+                    setNin(response.data.nin);
+                    setContact(response.data);
+                    setFoundContact(true);
+                }
+            })
+            .catch((reason => {
+                setContact(null);
+                setNin(reason.response.data.message);
+                setFoundContact(false);
+            }))
+            .finally(() => setLoading(false));
+    }, [nin, contact, foundContact]);
+
+    const renderFound = () => {
         if (contact.legal.length || contact.technical.length) {
-            return <div>
-                <ContactUpdate contact={contact} complete={true} />
-            </div>;
+            return <ContactUpdate contact={contact} complete={true}/>;
         } else {
-            return <div>
-                <ContactUpdate contact={contact} complete={false} />
-            </div>;
+            return <ContactUpdate contact={contact} complete={false}/>;
         }
     }
 
-    renderNew() {
-        return (<ContactNew nin={this.state.nin} />);
-    }
+    if (loading) return <LoadingProgress size={50}/>;
+    if (!foundContact) return (<ContactNew nin={nin}/>);
+    return renderFound();
 }
 
 export default Main;

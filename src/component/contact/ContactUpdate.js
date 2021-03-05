@@ -11,18 +11,18 @@ import ContactDelete from './ContactDelete';
 const styles = (theme) => ({
     root: {},
     paper: {
-        marginTop: theme.spacing.unit * 4,
+        marginTop: theme.spacing(4),
         maxWidth: "320px",
         minWidth: "0",
-        padding: theme.spacing.unit,
+        padding: theme.spacing(),
     },
     logo: {
-        marginBottom: theme.spacing.unit * 2,
+        marginBottom: theme.spacing(2),
         height: '50%',
         width: '50%',
     },
     button: {
-        marginTop: theme.spacing.unit * 4,
+        marginTop: theme.spacing(4),
     }
 });
 

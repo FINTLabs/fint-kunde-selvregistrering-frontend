@@ -1,16 +1,10 @@
+import axios from "axios";
+
 class ContactApi {
 
 
     static getContact() {
-        const url = `/api/self/register`;
-        return fetch(url, {
-            method: 'GET',
-            credentials: 'same-origin',
-        }).then(response => {
-            return response
-        }).catch(error => {
-            return error;
-        });
+          return axios.get(`/api/self/register`);
     }
 
     static deleteContact(nin) {

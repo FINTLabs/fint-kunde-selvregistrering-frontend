@@ -5,13 +5,13 @@ import ContactApi from "../../data/ContactApi";
 const styles = (theme) => ({
     root: {},
     paper: {
-        marginTop: theme.spacing.unit * 4,
+        marginTop: theme.spacing(4),
         maxWidth: "320px",
         minWidth: "0",
-        padding: theme.spacing.unit,
+        padding: theme.spacing(),
     },
     button: {
-        marginTop: theme.spacing.unit * 4,
+        marginTop: theme.spacing(4),
 
     }
 });

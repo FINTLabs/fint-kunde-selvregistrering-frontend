@@ -8,7 +8,7 @@ const styles = (theme) => ({
     message: {
         border: "dotted 1px gray",
         backgroundColor: theme.palette.secondary.light,
-        padding: theme.spacing.unit,
+        padding: theme.spacing(),
     }
 });
 
