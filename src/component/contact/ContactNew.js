@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { withStyles } from "@material-ui/core";
+import React, {Component} from "react";
+import {Box, withStyles} from "@material-ui/core";
 import PropTypes from "prop-types";
 import ContactApi from "../../data/ContactApi";
-import Paper from "../../../node_modules/@material-ui/core/Paper/Paper";
 import Grid from "../../../node_modules/@material-ui/core/Grid/Grid";
 import ContactForm from "./ContactForm";
 import ContactCreated from "./ContactCreated";
+import fintLogo from "../../images/fint-by-vigo.svg"
 
 
 const styles = (theme) => ({
@@ -41,14 +41,14 @@ class ContactNew extends Component {
         const contact = this.state.contact;
         contact[field] = event.target.value;
         contact["nin"] = this.props.nin;
-        return this.setState({ contact: contact });
+        return this.setState({contact: contact});
     };
 
     createContact = () => {
         ContactApi.createContact(this.state.contact)
             .then(response => {
                 if (response.status === 201) {
-                    this.setState({ created: true });
+                    this.setState({created: true});
                 }
             })
             .catch(() => {
@@ -61,7 +61,7 @@ class ContactNew extends Component {
     };
 
     renderNewContactForm() {
-        const { nin } = this.props;
+        const {nin} = this.props;
 
         return (
             <ContactForm
@@ -75,30 +75,29 @@ class ContactNew extends Component {
 
     static renderCreatedMessage() {
         return (
-            <ContactCreated />
+            <ContactCreated/>
         );
     }
 
     render() {
-        const { classes, nin } = this.props;
-        const { created } = this.state;
+        const {classes, nin} = this.props;
+        const {created} = this.state;
         return (
-            <Grid container className={classes.root} justify="center" alignItems="center">
-                <Grid item>
-                    <Paper className={classes.paper}>
-                        <Grid container justify="center" alignItems="center">
-                            <img src="fint.svg" alt="logo" className={classes.logo} />
-                        </Grid>
-                        <ContactForm
-                            createContact={this.createContact}
-                            isFormValid={this.isFormValid}
-                            updateContactState={this.updateContactState}
-                            nin={nin}
-                        />
-                        {created && ContactNew.renderCreatedMessage()}
-                    </Paper>
-                </Grid>
-            </Grid>
+            <Box display="flex" justifyContent="center">
+                <Box maxWidth="375px">
+                    <Grid container justify="center" alignItems="center">
+                        <img src={fintLogo} alt="logo" className={classes.logo}/>
+                    </Grid>
+                    <ContactForm
+                        createContact={this.createContact}
+                        isFormValid={this.isFormValid}
+                        updateContactState={this.updateContactState}
+                        nin={nin}
+                    />
+                    {created && ContactNew.renderCreatedMessage()}
+                </Box>
+            </Box>
+
 
         );
     }
