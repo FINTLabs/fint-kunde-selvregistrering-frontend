@@ -1,11 +1,9 @@
 import React, {useState} from "react";
-import {Box, createStyles, makeStyles} from "@material-ui/core";
+import {createStyles, makeStyles} from "@material-ui/core";
 import PropTypes from "prop-types";
 import ContactApi from "../../data/ContactApi";
-import Grid from "../../../node_modules/@material-ui/core/Grid/Grid";
 import ContactForm from "./ContactForm";
 import ContactCreated from "./ContactCreated";
-import fintLogo from "../../images/fint-by-vigo.svg"
 
 
 const useStyles = makeStyles((theme) =>
@@ -40,7 +38,8 @@ const ContactNew = (props) => {
                     setCreated(true);
                 }
             })
-            .catch(() => {});
+            .catch(() => {
+            });
     };
 
     const isFormValid = () => {
@@ -48,20 +47,15 @@ const ContactNew = (props) => {
     };
 
     return (
-        <Box display="flex" justifyContent="center">
-            <Box maxWidth="375px">
-                <Grid container justify="center" alignItems="center">
-                    <img src={fintLogo} alt="logo" className={classes.logo}/>
-                </Grid>
-                <ContactForm
-                    createContact={createContact}
-                    isFormValid={isFormValid}
-                    updateContactState={updateContactState}
-                    nin={nin}
-                />
-                {created && <ContactCreated/>}
-            </Box>
-        </Box>
+        <>
+            <ContactForm
+                createContact={createContact}
+                isFormValid={isFormValid}
+                updateContactState={updateContactState}
+                nin={nin}
+            />
+            {created && <ContactCreated/>}
+        </>
 
 
     );
