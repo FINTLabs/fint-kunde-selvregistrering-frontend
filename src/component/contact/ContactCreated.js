@@ -7,7 +7,7 @@ import Typography from "../../../node_modules/@material-ui/core/Typography/Typog
 const styles = (theme) => ({
     message: {
         border: "dotted 1px gray",
-        backgroundColor: theme.palette.secondary.light,
+        backgroundColor: theme.palette.primary.light,
         padding: theme.spacing(),
     }
 });
@@ -18,12 +18,11 @@ class ContactCreated extends Component {
         return (
             <React.Fragment>
                 <div className={classes.message}>
-                    <Typography variant="subheading">
+                    <Typography variant="body2">
                         Brukeren din er nå opprettet.
-                    </Typography>
-                    <Typography variant="h1">
+                        <br/>
                         For at du skal kunne ta i bruk FINT Kundeportal må du be FINT administratoren i din
-                        organisasjon gi det rettigheter til å administrere din organisasjon.
+                        organisasjon gi deg rettigheter til å administrere din organisasjon.
                     </Typography>
                 </div>
                 <GoToCustomerPortal redirect={false}/>
