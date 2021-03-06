@@ -1,23 +1,8 @@
 import React, {useState} from "react";
-import {createStyles, makeStyles} from "@material-ui/core";
 import PropTypes from "prop-types";
 import ContactApi from "../../data/ContactApi";
 import ContactForm from "./ContactForm";
 import ContactCreated from "./ContactCreated";
-
-
-const useStyles = makeStyles((theme) =>
-    createStyles({
-        root: {},
-        logo: {
-            marginBottom: theme.spacing(2),
-            height: '50%',
-            width: '50%',
-        },
-        button: {
-            marginTop: theme.spacing(4),
-        }
-    }));
 
 const ContactNew = (props) => {
 
@@ -29,7 +14,6 @@ const ContactNew = (props) => {
     const [nin] = useState(props.nin)
     const [contact, setContact] = useState({});
 
-    const classes = useStyles();
 
     const createContact = () => {
         ContactApi.createContact(contact)
@@ -48,13 +32,16 @@ const ContactNew = (props) => {
 
     return (
         <>
-            <ContactForm
-                createContact={createContact}
-                isFormValid={isFormValid}
-                updateContactState={updateContactState}
-                nin={nin}
-            />
-            {created && <ContactCreated/>}
+            {created ?
+                <ContactCreated/>
+                :
+                <ContactForm
+                    createContact={createContact}
+                    isFormValid={isFormValid}
+                    updateContactState={updateContactState}
+                    nin={nin}
+                />
+            }
         </>
 
 

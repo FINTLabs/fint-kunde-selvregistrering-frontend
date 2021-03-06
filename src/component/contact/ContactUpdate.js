@@ -1,85 +1,57 @@
-import React, {Component} from "react";
-import {withStyles} from "@material-ui/core";
-import PropTypes from "prop-types";
+import React, {useState} from "react";
 import ContactApi from "../../data/ContactApi";
 import ContactForm from "./ContactForm";
 import GoToCustomerPortal from "../GoToCustomerPortal";
-import ContactDelete from './ContactDelete';
+import ContactDelete from "./ContactDelete";
+import InformationCard from "../InformationCard";
+import {Box} from "@material-ui/core";
 
-const styles = (theme) => ({
-    root: {},
-    paper: {
-        marginTop: theme.spacing(4),
-        maxWidth: "320px",
-        minWidth: "0",
-        padding: theme.spacing(),
-    },
-    logo: {
-        marginBottom: theme.spacing(2),
-        height: '50%',
-        width: '50%',
-    },
-    button: {
-        marginTop: theme.spacing(4),
-    }
-});
+const ContactUpdate = (props) => {
+    const [updated, setUpdated] = useState(false);
+    const [complete] = useState(props.complete);
+    const [contact, setContact] = useState(props.contact);
 
-class ContactUpdate extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            updated: false,
-            complete: this.props.complete,
-            contact: this.props.contact
-        };
-    }
-
-    updateContactState = (event) => {
-        const field = event.target.name;
-
-        const contact = this.state.contact;
-        contact[field] = event.target.value;
-        return this.setState({contact: contact});
+    const updateContactState = (event) => {
+        setContact({...contact, [event.target.name]: event.target.value});
     };
 
-    updateContact = () => {
-        ContactApi.updateContact(this.state.contact)
+    const updateContact = () => {
+        ContactApi.updateContact(contact)
             .then(response => {
-                if (response.status === 200) {
-                    this.setState({updated: true});
+                if (response.status === 201) {
+                    setUpdated(true);
                 }
             })
             .catch(() => {
             });
     };
 
-    isFormValid = () => {
-        const contact = this.state.contact;
+    const isFormValid = () => {
         return contact.nin && contact.firstName && contact.lastName && contact.mail && contact.mobile;
     };
 
-    render() {
-        const {classes} = this.props;
-        const {contact, complete} = this.state;
-        return (
-            <>
-                <ContactForm
-                    createContact={this.updateContact}
-                    isFormValid={this.isFormValid}
-                    updateContactState={this.updateContactState}
-                    contact={contact}
-                    nin={contact.nin}
-                />
-                {complete
-                    ? <GoToCustomerPortal redirect={false} fullWidth={true}/>
-                    : <ContactDelete/>}
-            </>
-        );
-    }
+    return (
+        <>
+            {updated &&
+            <Box mb={2}>
+                <InformationCard dense>
+                    Informasjonen er oppdatert!
+                </InformationCard>
+            </Box>
+            }
+            <ContactForm
+                createContact={updateContact}
+                isFormValid={isFormValid}
+                updateContactState={updateContactState}
+                contact={contact}
+                nin={contact.nin}
+            />
+            {complete && <GoToCustomerPortal redirect={false} fullWidth={true}/>}
+            <ContactDelete complete={complete}/>
+        </>
+    );
 }
 
-ContactUpdate.propTypes = {
-    classes: PropTypes.object.isRequired
-};
+//ContactUpdate.propTypes = {};
 
-export default withStyles(styles)(ContactUpdate);
+export default ContactUpdate;

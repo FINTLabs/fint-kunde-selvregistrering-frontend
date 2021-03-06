@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) =>
         }
     ));
 
-function App() {
+const App = () => {
     const classes = useStyles();
     return (
         <div className="App">
@@ -48,6 +48,6 @@ function App() {
             </MuiThemeProvider>
         </div>
     );
-}
+};
 
 export default App;
