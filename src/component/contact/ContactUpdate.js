@@ -32,9 +32,9 @@ const ContactUpdate = (props) => {
         <>
             {updated &&
             <Box mb={2}>
-                <InformationCard dense>
-                    Informasjonen er oppdatert!
-                </InformationCard>
+                <InformationCard
+                    body="Informasjonen er oppdatert!"
+                    dense/>
             </Box>
             }
             <ContactForm
