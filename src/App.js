@@ -1,9 +1,9 @@
 import React from 'react';
 import {ThemeProvider as MuiThemeProvider} from '@material-ui/core/styles';
 import {Box, createMuiTheme, createStyles, makeStyles} from "@material-ui/core";
-import Main from "./Main";
+import ContactRouter from "./component/ContactRouter";
 import Grid from "@material-ui/core/Grid/Grid";
-import fintLogo from "./images/fint-by-vigo.svg";
+import FintLogo from "./images/fint-by-vigo.svg";
 
 const theme = createMuiTheme({
     palette: {
@@ -11,13 +11,11 @@ const theme = createMuiTheme({
             light: '#7fb434',
             main: '#5FA202',
             dark: '#427101',
-            //contrastText: '#fff',
         },
         secondary: {
             light: '#4b727a',
             main: '#1F4F59',
             dark: '#15373e',
-            //contrastText: '#000',
         },
     },
 });
@@ -40,9 +38,9 @@ const App = () => {
                 <Box display="flex" justifyContent="center">
                     <Box maxWidth="500px">
                         <Grid container justify="center" alignItems="center">
-                            <img src={fintLogo} alt="logo" className={classes.logo}/>
+                            <img src={FintLogo} alt="logo" className={classes.logo}/>
                         </Grid>
-                        <Main/>
+                        <ContactRouter/>
                     </Box>
                 </Box>
             </MuiThemeProvider>

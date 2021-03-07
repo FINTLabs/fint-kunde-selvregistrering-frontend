@@ -21,8 +21,6 @@ const ContactUpdate = (props) => {
                 if (response.status === 201) {
                     setUpdated(true);
                 }
-            })
-            .catch(() => {
             });
     };
 

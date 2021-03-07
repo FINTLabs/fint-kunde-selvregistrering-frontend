@@ -13,7 +13,7 @@ const ContactDelete = ({complete}) => {
     const deleteContact = () => {
         if (confirm) {
             ContactApi.deleteContact()
-                .then(response => {
+                .then(() => {
                     clearTimeout(timer);
                     setLabel("Kontakt slettet!");
                     setTimeout(() => window.location.href = "https://www.fintlabs.no", 1500)
@@ -31,12 +31,12 @@ const ContactDelete = ({complete}) => {
     return (
         <Box mt={4} display="flex" flexDirection="column" alignItems="center">
             {!complete &&
-            <InformationCard>
-                For at du skal kunne ta i bruk FINT Kundeportal må du be FINT
-                administratoren i
-                din
-                organisasjon gi deg rettigheter til å administrere din organisasjon.
-            </InformationCard>
+            <InformationCard
+                body="For at du skal kunne ta i bruk FINT Kundeportal må du be FINT
+                administratoren i din organisasjon gi deg rettigheter til å
+                administrere din organisasjon."
+            />
+
             }
             <Box mt={2}>
                 <Button onClick={() => deleteContact()}
@@ -48,9 +48,11 @@ const ContactDelete = ({complete}) => {
     );
 }
 
-ContactDelete.propTypes = {
-    complete: PropTypes.bool.isRequired
-};
+ContactDelete.propTypes =
+    {
+        complete: PropTypes.bool.isRequired
+    }
+;
 
 
 export default ContactDelete;

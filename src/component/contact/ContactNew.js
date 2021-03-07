@@ -21,8 +21,6 @@ const ContactNew = (props) => {
                 if (response.status === 201) {
                     setCreated(true);
                 }
-            })
-            .catch(() => {
             });
     };
 
@@ -43,8 +41,6 @@ const ContactNew = (props) => {
                 />
             }
         </>
-
-
     );
 }
 
