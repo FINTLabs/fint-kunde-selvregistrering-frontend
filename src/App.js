@@ -1,35 +1,51 @@
-import React, {Component} from 'react';
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-import {createMuiTheme} from "@material-ui/core";
-import Main from "./Main";
+import React from 'react';
+import {ThemeProvider as MuiThemeProvider} from '@material-ui/core/styles';
+import {Box, createMuiTheme, createStyles, makeStyles} from "@material-ui/core";
+import ContactRouter from "./component/ContactRouter";
+import Grid from "@material-ui/core/Grid/Grid";
+import FintLogo from "./images/fint-by-vigo.svg";
 
 const theme = createMuiTheme({
     palette: {
         primary: {
-            light: '#f05545',
-            main: '#b71c1c',
-            dark: '#7f0000',
-            contrastText: '#fff',
+            light: '#7fb434',
+            main: '#5FA202',
+            dark: '#427101',
         },
         secondary: {
-            light: '#98ee99',
-            main: '#66bb6a',
-            dark: '#338a3e',
-            contrastText: '#000',
+            light: '#4b727a',
+            main: '#1F4F59',
+            dark: '#15373e',
         },
     },
 });
 
-class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <MuiThemeProvider theme={theme}>
-                    <Main/>
-                </MuiThemeProvider>
-            </div>
-        );
-    }
-}
+const useStyles = makeStyles((theme) =>
+    createStyles({
+            logo: {
+                marginBottom: theme.spacing(2),
+                height: '50%',
+                width: '50%',
+            },
+        }
+    ));
+
+const App = () => {
+    const classes = useStyles();
+    return (
+        <div className="App">
+            <MuiThemeProvider theme={theme}>
+                <Box display="flex" justifyContent="center">
+                    <Box maxWidth="500px">
+                        <Grid container justify="center" alignItems="center">
+                            <img src={FintLogo} alt="logo" className={classes.logo}/>
+                        </Grid>
+                        <ContactRouter/>
+                    </Box>
+                </Box>
+            </MuiThemeProvider>
+        </div>
+    );
+};
 
 export default App;

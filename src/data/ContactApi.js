@@ -1,35 +1,22 @@
+import axios from "axios";
+
 class ContactApi {
 
 
     static getContact() {
-        const url = `/api/self/register`;
-        return fetch(url, {
-            method: 'GET',
-            credentials: 'same-origin',
-        }).then(response => {
-            return response
-        });
+          return axios.get(`/api/self/register`);
     }
 
+    static deleteContact() {
+        return axios.delete(`/api/self/register`);
+    }
 
     static createContact(contact) {
-        const request = new Request(`/api/self/register`, {
-            method: 'POST',
-            headers: {
-                'Accept': '*/*',
-                'Content-Type': 'application/json'
-            },
-            credentials: 'same-origin',
-            body: JSON.stringify(contact)
-        });
+        return axios.post(`/api/self/register`, contact);
+    }
 
-        return fetch(request)
-            .then(response => {
-                return response;
-            })
-            .catch(error => {
-                return error;
-            });
+    static updateContact(contact) {
+        return axios.put(`/api/self/register`, contact)
     }
 
 }

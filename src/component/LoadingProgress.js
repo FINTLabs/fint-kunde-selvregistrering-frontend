@@ -11,17 +11,13 @@ const styles = () => ({
     },
 });
 
-class LoadingProgress extends React.Component {
+function LoadingProgress(props) {
 
-    render() {
+    const {classes, color, size} = props;
 
-        const {classes, color, size} = this.props;
-
-        return (
-            <CircularProgress color={color} className={classes.progress} size={size}/>
-        );
-    }
-
+    return (
+        <CircularProgress color={color} className={classes.progress} size={size}/>
+    );
 }
 
 LoadingProgress.propTypes = {
