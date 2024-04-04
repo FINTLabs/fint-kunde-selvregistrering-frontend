@@ -18,11 +18,11 @@ spec:
   imagePullPolicy: Always
   resources:
     limits:
-      memory: 512Mi
-      cpu: 500m
+      memory: "712Mi"
+      cpu: "500m"
     requests:
-      memory: 256Mi
-      cpu: 250m
+      memory: "256Mi"
+      cpu: "250m"
   restartPolicy: Always
   replicas: 1
   strategy:
