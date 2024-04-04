@@ -1,4 +1,6 @@
-FROM node:21
-COPY . /src
-WORKDIR /src
-RUN yarn && yarn build
+FROM node:16.14.0-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN yarn install
+COPY . .
+CMD ["yarn", "start"]
