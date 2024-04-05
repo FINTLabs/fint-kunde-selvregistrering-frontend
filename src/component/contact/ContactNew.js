@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import ContactApi from "../../data/ContactApi";
 import ContactForm from "./ContactForm";
 import ContactCreated from "./ContactCreated";
+import Consent from "../concent/Consent";
 
 const ContactNew = (props) => {
 
@@ -40,6 +41,9 @@ const ContactNew = (props) => {
                     nin={nin}
                 />
             }
+            <div>
+                <Consent/>
+            </div>
         </>
     );
 }
