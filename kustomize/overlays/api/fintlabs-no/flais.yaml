@@ -20,7 +20,6 @@ spec:
       value: /
   url:
     hostname: registrering.felleskomponent.no
-    loggingLevel: debug
   ingress:
     enabled: true
     middlewares:
