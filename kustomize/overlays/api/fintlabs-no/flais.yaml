@@ -13,7 +13,7 @@ metadata:
 spec:
   port: 8000
   orgId: fintlabs.no
-  image: ghcr.io/fintlabs/fint-kunde-selvregistrering-frontend:sha-0000000
+  image: ghcr.io/fintlabs/fint-kunde-selvregistrering-frontend:sha-51688a8
   env:
     - name: BASE_PATH
       value: /
