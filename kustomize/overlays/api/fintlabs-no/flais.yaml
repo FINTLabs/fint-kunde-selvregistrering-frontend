@@ -19,6 +19,7 @@ spec:
       value: /
   url:
     hostname: registrering.felleskomponent.no
+    basePath: /
   ingress:
     enabled: true
     middlewares:
