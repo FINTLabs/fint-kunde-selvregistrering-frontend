@@ -2,10 +2,9 @@ apiVersion: fintlabs.no/v1alpha1
 kind: Application
 metadata:
   name: fint-kunde-selvregistrering-frontend
-  namespace: fintlabs-no
   labels:
     app.kubernetes.io/name: fint-kunde-selvregistrering-frontend
-    app.kubernetes.io/instance: fint-kunde-selvregistrering-frontend_fintlabs_no
+    app.kubernetes.io/instance: fint-kunde-selvregistrering-frontend
     app.kubernetes.io/version: latest
     app.kubernetes.io/component: frontend
     app.kubernetes.io/part-of: fint-core
@@ -13,24 +12,24 @@ metadata:
     fintlabs.no/org-id: fintlabs.no
 spec:
   port: 8000
-  orgId: fintlabs.no
-  image: ghcr.io/fintlabs/fint-kunde-selvregistrering-frontend:sha-7d9f147
   imagePullPolicy: Always
+  orgId: fintlabs.no
+  image: ghcr.io/fintlabs/fint-kunde-selvregistrering-frontend:latest
+  env:
+    - name: BASE_PATH
+      value: /
+  url:
+    hostname: registrering.felleskomponent.no
+    loggingLevel: debug
+  ingress:
+    enabled: true
+    middlewares:
+      - fint-kunde-selvregistrering-sso
   resources:
     limits:
-      memory: "712Mi"
+      memory: "512Mi"
       cpu: "500m"
     requests:
       memory: "256Mi"
       cpu: "250m"
   restartPolicy: Always
-  replicas: 1
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
-  ingress:
-    enabled: true
-    middlewares:
-      - fint-kunde-selvregistrering-sso
