@@ -6,8 +6,8 @@ import InformationCard from "../InformationCard";
 const ContactCreated = () => (
     <>
         <InformationCard
-            body="For at du skal kunne ta i bruk FINT Kundeportal må du be FINT administratoren i din
-            organisasjon gi det rettigheter til å administrere din organisasjon."
+            body="Din brukerkonto er opprettet.
+             For å bruke Kundeportalen må en FINT-administrator i din organisasjon legge deg til som teknisk kontakt i Kundeportalen."
             header="Brukeren din er nå opprettet!"
         />
 

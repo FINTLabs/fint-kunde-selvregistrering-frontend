@@ -16,7 +16,7 @@ const GoToCustomerPortal = ({redirect, fullWidth}) => {
         <Box mt={2}>
                 <Button fullWidth={fullWidth} variant="outlined" color="primary"
                         href="https://kunde.felleskomponent.no">
-                    Gå til FINT Kundeportal
+                    Gå til Kundeportalen
                 </Button>
         </Box>
     );
