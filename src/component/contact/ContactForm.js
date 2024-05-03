@@ -1,27 +1,62 @@
 import PropTypes from 'prop-types'
 import React, {useState} from 'react';
-import {Box, Button, TextField} from "@material-ui/core";
+import {
+    Box,
+    Button,
+    FormControl,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    OutlinedInput,
+    TextField
+} from "@material-ui/core";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 const ContactForm = ({nin, contact, updateContactState, createContact, isFormValid}) => {
-    const [showNin, setShowNin] = useState(false);
+    const [values, setValues] = React.useState({
+        password: '',
+        showPassword: false,
+    });
+
+    // const handleChange = (prop) => (event) => {
+    //     setValues({ ...values, [prop]: event.target.value });
+    // };
+
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
     return (
         <React.Fragment>
             <Box mb={1}>
-                <TextField
-                    name="nin"
-                    label="Fødselsnummer (hold musen over for å vise)"
-                    variant="outlined"
-                    fullWidth
-                    disabled
-                    inputProps={{
-                        style: {
-                            visibility: showNin ? 'visible' : 'hidden'
+                <FormControl variant="outlined" required fullWidth>
+                    <InputLabel htmlFor="outlined-adornment-password">Fødselsnummer</InputLabel>
+                    <OutlinedInput
+                        name="nin"
+                        id="outlined-adornment-password"
+                        type={values.showPassword ? 'text' : 'password'}
+                        value={nin ? nin : undefined}
+                        readOnly
+                        //onChange={handleChange('password')}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
                         }
-                    }}
-                    value={nin ? nin : undefined}
-                    onMouseEnter={() => setShowNin(true)}
-                    onMouseLeave={() => setShowNin(false)}
-                />
+                        labelWidth={130}
+                    />
+                </FormControl>
             </Box>
             <Box mb={1}>
                 <TextField

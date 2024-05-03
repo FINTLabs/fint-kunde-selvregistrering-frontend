@@ -1,11 +1,11 @@
 import React from 'react';
 import {ThemeProvider as MuiThemeProvider} from '@material-ui/core/styles';
-import {Box, createMuiTheme, createStyles, makeStyles} from "@material-ui/core";
+import {Box, createTheme, createStyles, makeStyles} from "@material-ui/core";
 import ContactRouter from "./component/ContactRouter";
 import Grid from "@material-ui/core/Grid/Grid";
 import FintLogo from "./images/fint-by-vigo.svg";
 
-const theme = createMuiTheme({
+const theme = createTheme({
     palette: {
         primary: {
             light: '#7fb434',
