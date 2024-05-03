@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) =>
     createStyles({
             logo: {
                 marginBottom: theme.spacing(2),
-                height: '50%',
-                width: '50%',
+                height: 'auto%',
+                width: '40%',
             },
         }
     ));
@@ -37,7 +37,7 @@ const App = () => {
             <MuiThemeProvider theme={theme}>
                 <Box display="flex" justifyContent="center">
                     <Box maxWidth="500px">
-                        <Grid container justify="center" alignItems="center">
+                        <Grid container justifyContent="flex-end" alignItems="center">
                             <img src={FintLogo} alt="logo" className={classes.logo}/>
                         </Grid>
                         <ContactRouter/>
