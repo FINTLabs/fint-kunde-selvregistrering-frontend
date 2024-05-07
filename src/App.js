@@ -37,7 +37,7 @@ const App = () => {
             <MuiThemeProvider theme={theme}>
                 <Box display="flex" justifyContent="center">
                     <Box maxWidth="500px">
-                        <Grid container justifyContent="flex-end" alignItems="center">
+                        <Grid container justifyContent="center" alignItems="center">
                             <img src={FintLogo} alt="logo" className={classes.logo}/>
                         </Grid>
                         <ContactRouter/>
